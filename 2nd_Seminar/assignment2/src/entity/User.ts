@@ -5,5 +5,9 @@ export class User {
 
   public email: string;
 
-  public password: string;
+  constructor(id: Number) {
+    this.id = id;
+    this.realName = "이승헌"
+    this.email = "crayon@gmail.com";
+  }
 }

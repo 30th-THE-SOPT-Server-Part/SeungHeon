@@ -1,3 +1,3 @@
 export const routingControllerOptions = {
-    controllers: [`${__dirname}/../controllers/*{.ts,.js}`]
+    controllers: [`${__dirname}/../controller/*{.ts,.js}`]
 }

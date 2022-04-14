@@ -7,7 +7,7 @@ import { BlogRepository } from "../repository/BlogRepository";
 @Service()
 export class BlogService {
     constructor (
-        @InjectRepository() private blogRepository: BlogRepository
+        //@InjectRepository() private blogRepository: BlogRepository
     ) {}
 
     /**
@@ -15,8 +15,8 @@ export class BlogService {
      */
     public async createBlog(createBlogDto: CreateBlogDto): Promise<Blog> {
         const blog = createBlogDto.toEntity();
-        const newBlog = await this.blogRepository.save(blog);
+        console.log(blog);
 
-        return newBlog;
+        return blog;
     }
 }

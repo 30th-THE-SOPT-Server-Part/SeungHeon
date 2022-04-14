@@ -1,10 +1,6 @@
 import "reflect-metadata";
-import express, { NextFunction } from "express";
-import { Container } from "typedi";
-import {
-    useContainer as routingUseContainer,
-    useExpressServer,
-} from "routing-controllers";
+import express from "express";
+import { useExpressServer } from "routing-controllers";
 import { routingControllerOptions } from "./utils/RoutingConfig";
 
 export class App {
@@ -20,10 +16,7 @@ export class App {
      */
     public async createExpressServer(port: number): Promise<void> {
         try {
-            routingUseContainer(Container);
             useExpressServer(this.app, routingControllerOptions);
-
-            this.app.use(express.json());
 
             this.app.listen(port, () => {
                 console.log(`Server is running on http://localhost:${port}`);

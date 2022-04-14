@@ -2,12 +2,11 @@ import { Service } from "typedi";
 import { InjectRepository } from "typeorm-typedi-extensions";
 import { CreateUserDto } from "../dto/UserDto";
 import { User } from "../entity/User";
-import { UserRepository } from "../repository/UserRepository";
 
 @Service()
 export class UserService {
     constructor (
-        @InjectRepository() private userRepository: UserRepository
+        //@InjectRepository() private userRepository: UserRepository
     ) {}
 
     /**
@@ -15,15 +14,17 @@ export class UserService {
      */
     public async createUser(createUserDto: CreateUserDto): Promise<User> {
         const user = createUserDto.toEntity();
-        const newUser = await this.userRepository.save(user);
+        console.log(user);
 
-        return newUser;
+        return user;
     }
 
     /**
      * 사용자 조회
      */
     public async getUserById(id: Number): Promise<User> {
-        return new User();
+        const user = new User(id);
+
+        return user;
     }
 }

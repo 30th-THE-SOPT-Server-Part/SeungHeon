@@ -11,6 +11,12 @@ export class ApiController {
   constructor(private userService: UserService, private blogService: BlogService) {}
 
   @HttpCode(200)
+  @Get("/")
+  public async testGet(@Res() res: Response) {
+    return res.status(200).send({ message: "테스트 성공!"});
+  }
+
+  @HttpCode(200)
   @Get("/user")
   @OpenAPI({
     summary: "사용자 정보",

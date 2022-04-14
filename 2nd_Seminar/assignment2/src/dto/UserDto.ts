@@ -4,15 +4,13 @@ import { User } from "../entity/User";
 export class CreateUserDto {
   public realName: string;
   public email: string;
-  public password: string;
 
   public toEntity(): User {
-    const {realName, email, password } = this;
+    const {realName, email} = this;
     
-    const user = new User();
+    const user = new User(1);
     user.realName = realName;
     user.email = email;
-    user.password = password;
 
     return user;
   }
