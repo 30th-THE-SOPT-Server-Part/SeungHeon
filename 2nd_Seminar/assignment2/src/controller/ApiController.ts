@@ -5,10 +5,15 @@ import { Response } from "express";
 import { CreateBlogDto } from "../dto/BlogDto";
 import { CreateUserDto, ResponseUserDto } from "../dto/UserDto";
 import { BlogService } from "../service/BlogService";
+import Container from "typedi";
 
 @JsonController("/api")
 export class ApiController {
-  constructor(private userService: UserService, private blogService: BlogService) {}
+
+  constructor(userService: UserService, blogService: BlogService) {}
+
+  private userServiceTest = Container.get(UserService);
+  private blogServiceTest = Container.get(BlogService);
 
   @HttpCode(200)
   @Get("/")
@@ -31,7 +36,7 @@ export class ApiController {
   public async getUser(@Res() res: Response) {
 
     // 임시로 항상 1번 유저의 데이터를 반환
-    const user = await this.userService.getUserById(1);
+    const user = await this.userServiceTest.getUserById(1);
 
     if (!user) {
       return res.status(400).send({ message: "일치하는 사용자가 없습니다." });
@@ -50,7 +55,7 @@ export class ApiController {
   public async createBlog(@Body() createBlogDto: CreateBlogDto, @Res() res: Response) {
 
     // 임시로 항상 1번 유저가 포스팅 생성
-    const newPost = await this.blogService.createBlog(createBlogDto);
+    const newPost = await this.blogServiceTest.createBlog(createBlogDto);
 
     return newPost;
   }
@@ -63,7 +68,7 @@ export class ApiController {
   })
   public async signup(@Body() createUserDto: CreateUserDto) {
 
-    const newUser = await this.userService.createUser(createUserDto);
+    const newUser = await this.userServiceTest.createUser(createUserDto);
 
     const user: ResponseUserDto = {
       realName: newUser.realName,
