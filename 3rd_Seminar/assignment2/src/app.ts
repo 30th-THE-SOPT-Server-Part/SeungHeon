@@ -1,6 +1,6 @@
 import express from 'express';
 import { useExpressServer } from 'routing-controllers';
-import { routingControllerOptions } from './util/RoutingConfig';
+import { routingControllerOptions } from './utils/RoutingConfig';
 
 export class App {
   public app: express.Application;
@@ -18,7 +18,11 @@ export class App {
       useExpressServer(this.app, routingControllerOptions);
 
       this.app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${port}`);
+        console.log(`
+            #############################################
+                🛡️ Server listening on port: 8080 🛡️
+            #############################################
+                `);
       });
     } catch (error) {
       console.log(error);
