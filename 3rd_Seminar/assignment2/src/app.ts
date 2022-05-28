@@ -1,5 +1,6 @@
 import express from 'express';
 import { useExpressServer } from 'routing-controllers';
+import { createDatabaseConnection } from './database';
 import { routingControllerOptions } from './utils/RoutingConfig';
 
 export class App {
@@ -7,6 +8,19 @@ export class App {
 
   constructor() {
     this.app = express();
+    this.setDatabase();
+  }
+
+  /**
+   * 데이터베이스를 세팅한다.
+   */
+  private async setDatabase(): Promise<void> {
+    try {
+      await createDatabaseConnection();
+      console.log('typeoORM DB 커넥션 생성됨');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   /**

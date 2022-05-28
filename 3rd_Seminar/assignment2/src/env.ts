@@ -19,7 +19,7 @@ export const env = {
   database: {
     host: process.env.DATABASE_HOST,
     port: Number(process.env.DATABASE_PORT) || 3306,
-    usename: process.env.DATABASE_USERNAME,
+    username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     name: process.env.DATABASE_NAME,
     synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
